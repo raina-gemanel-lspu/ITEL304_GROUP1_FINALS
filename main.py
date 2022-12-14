@@ -98,8 +98,8 @@ class Game(ScreenManager):
             if self.number_of_players == 1:
                 winner = self.players[0]
                 self.winner_text = (
-                    f"[b]You[/b] having started at ${winner.START_MONEY} "
-                    f"and ending at ${winner.money}. It's a success!"
+                    f"[b]You[/b] having started at ₱{winner.START_MONEY} "
+                    f"and ending at ₱{winner.money}. It's a success!"
                 )
             else:
                 max_money = (max(*self.players, key=lambda player: player.money)).money
@@ -112,7 +112,7 @@ class Game(ScreenManager):
                     winner = self.winners[0]
                     self.winner_text = (
                         f"The winner is [b]{winner.name}[/b]!\n"
-                        f"Having started at ${winner.START_MONEY} and winning at ${winner.money}."
+                        f"Having started at ₱{winner.START_MONEY} and winning at ₱{winner.money}."
                     )
 
                 # joint winners
@@ -120,8 +120,8 @@ class Game(ScreenManager):
                     self.winner_text = "There's a tie. The joint winners are:\n\n"
                     for winner in self.winners:
                         self.winner_text += (
-                            f"[b]{winner.name}[/b] having started at ${winner.START_MONEY} "
-                            f"and winning at ${winner.money}.\n"
+                            f"[b]{winner.name}[/b] having started at ₱{winner.START_MONEY} "
+                            f"and winning at ₱{winner.money}.\n"
                         )
 
     def gameover_check(self):

@@ -67,7 +67,7 @@ class RaceScreen(Screen):
             self.show_race_results()
             self.dialog.content_cls.ids.race_winner.text = (
                 f"[b][color={self.winner_bug.color}]{self.winner_bug.name}"
-                f"[/color][/b] is win the race!"
+                f"[/color][/b] has won the race!"
             )
             for i in range(4):
                 if self.game.possible_players[i].active:
@@ -94,7 +94,7 @@ class RaceScreen(Screen):
         text = (
             f"{player.name}   [color={player.money_won_color}]"
             f"{player.money_won}[/color]   "
-            f"${player.money}"
+            f"₱{player.money}"
         )
         return text
 

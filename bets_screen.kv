@@ -29,7 +29,7 @@
             halign: "left"
             valigin: "top"
             bold: True
-            text: (root.player_name) + "   $" + str(root.player_money)
+            text: (root.player_name) + "   ₱" + str(root.player_money)
             
         GridLayout:
             size_hint: 1, .7
@@ -178,12 +178,12 @@
             italic: True
             halign: "center"
             color: get_color_from_hex("#460C68")
-            text: "Ladybug\n   Racing"
+            text: "Turtle Army\n   Racing"
             
         Image:
             source: "images/title.jpg"
             size_hint: None, None
-            size: 60, 60
+            size: 70, 70
             pos_hint: {"center_x": .25, "top": .35}
             
     CheckLabel:
@@ -194,4 +194,4 @@
 
 <AlertDialog>:
     CheckLabel:
-        text: "To bet choose one of the ladybugs!"                    
+        text: "To bet choose one of the turtles!"                    
