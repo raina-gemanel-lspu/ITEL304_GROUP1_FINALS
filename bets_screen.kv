@@ -1,0 +1,197 @@
+#:import bets_screen bets_screen
+
+    
+<CheckLabel@MDLabel>:
+    font_name: "Rubik"
+    halign: "center"
+    color: 0, 0, 0, 1
+    
+            
+<BetWidget>:
+    checkboxes: [check_bug_red, check_bug_green, check_bug_blue, check_bug_orange]
+    pos_hint: {'center_x': root.start_pos}
+    
+    MDBoxLayout:
+        canvas:
+            Color:
+                rgba: 0, 0, 0, .9
+            Line:
+                rounded_rectangle: self.x, self.y, self.width, self.height, 25        
+                width: 2
+                        
+        orientation: "vertical"
+        md_bg_color: app.theme_cls.primary_light
+        padding: 30
+        spacing: 10
+                
+        CheckLabel:
+            size_hint: 1, .1
+            halign: "left"
+            valigin: "top"
+            bold: True
+            text: (root.player_name) + "   $" + str(root.player_money)
+            
+        GridLayout:
+            size_hint: 1, .7
+            rows: 2
+            
+            CheckLabel:
+                text: "Red"
+                
+            CheckLabel:
+                text: "Green"
+                
+            CheckLabel:
+                text: "Blue"
+                
+            CheckLabel:
+                text: "Orange"
+                                
+            MDCheckbox:
+                id: check_bug_red
+                group: root.player_group
+                on_active: root.bet_bug = "Red" if self.active else ""
+                                
+            MDCheckbox:
+                id: check_bug_green
+                group: root.player_group
+                on_active: root.bet_bug = "Green" if self.active else ""
+                            
+            MDCheckbox:
+                id: check_bug_blue
+                group: root.player_group
+                on_active: root.bet_bug = "Blue" if self.active else ""
+                           
+            MDCheckbox:
+                id: check_bug_orange
+                group: root.player_group
+                on_active: root.bet_bug = "Orange" if self.active else ""
+                
+        BoxLayout:
+            size_hint: 1, .2
+            orientation: "horizontal"
+            
+            CheckLabel:
+                size_hint: .2, 1               
+                text: "Bet"
+                
+            MDSlider:
+                id: bet_slider
+                size_hint: .8, 1
+                max: root.max_bet_value
+                min: 1
+                step: 1
+                on_value: root.bet_value = self.value            
+                    
+        
+<BetsScreen>:
+    game: root.manager
+    bets: [bet_player1, bet_player2, bet_player3, bet_player4]
+    
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: app.theme_cls.primary_light
+        padding: 30, 60
+        spacing: 30
+        
+        CheckLabel:
+            size_hint: 1, .06
+            font_size: 50
+            text: str(root.game.current_number_of_races) + (" race of " if root.game.current_number_of_races == 1 else " races of ") + str(root.game.total_number_of_races)
+        
+        MDFillRoundFlatButton:
+            size_hint: .5, .06
+            pos_hint: {'center_x': .5}
+            text: "GO RACE"
+            font_style: "H6"
+            on_release: root.go_race_btn()
+                
+        BetWidget:
+            id: bet_player1
+            size_hint: 1, .22
+            start_pos: 0            
+            player_group: "player1"
+            player_name: root.game.player1.name 
+            player_money: root.game.player1.money      
+            max_bet_value: root.game.player1.money 
+            disabled: root.game.player1.looser
+            opacity: int(root.game.player1.active)
+          
+            on_bet_value: self.update_player_bet(root.game.player1) 
+            on_bet_bug: self.update_player_bug(root.game.player1)     
+                
+        BetWidget:
+            id: bet_player2
+            size_hint: 1, .22
+            start_pos: 1
+            player_group: "player2"
+            player_name: root.game.player2.name 
+            player_money: root.game.player2.money      
+            max_bet_value: root.game.player2.money 
+            disabled: root.game.player2.looser
+            opacity: int(root.game.player2.active)
+          
+            on_bet_value: self.update_player_bet(root.game.player2) 
+            on_bet_bug: self.update_player_bug(root.game.player2)
+            
+        BetWidget:
+            id: bet_player3
+            size_hint: 1, .22
+            start_pos: 0
+            player_group: "player3"
+            player_name: root.game.player3.name 
+            player_money: root.game.player3.money      
+            max_bet_value: root.game.player3.money 
+            disabled: root.game.player3.looser
+            opacity: int(root.game.player3.active)
+          
+            on_bet_value: self.update_player_bet(root.game.player3) 
+            on_bet_bug: self.update_player_bug(root.game.player3)
+            
+        BetWidget:
+            id: bet_player4
+            size_hint: 1, .22
+            start_pos: 1
+            player_group: "player4"
+            player_name: root.game.player4.name 
+            player_money: root.game.player4.money      
+            max_bet_value: root.game.player4.money 
+            disabled: root.game.player4.looser
+            opacity: int(root.game.player4.active)
+          
+            on_bet_value: self.update_player_bet(root.game.player4) 
+            on_bet_bug: self.update_player_bug(root.game.player4)
+
+                        
+<GameResults>:
+    size_hint_y: None
+    height: "380dp"
+    orientation: 'vertical'
+    
+    FloatLayout:
+        size_hint: 1, .1
+    
+        MDLabel:
+            pos_hint: {"center_x": .5, "center_y": .5}
+            font_name: "Rubik"
+            font_size: 60
+            italic: True
+            halign: "center"
+            color: get_color_from_hex("#460C68")
+            text: "Ladybug\n   Racing"
+            
+        Image:
+            source: "images/title.jpg"
+            size_hint: None, None
+            size: 60, 60
+            pos_hint: {"center_x": .25, "top": .35}
+            
+    CheckLabel:
+        id: winner
+        size_hint: 1, .9
+        font_size: 34
+        markup: True
+
+<AlertDialog>:
+    CheckLabel:
+        text: "To bet choose one of the ladybugs!"                    

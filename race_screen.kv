@@ -1,0 +1,149 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import race_screen race_screen 
+
+
+<ResultsLabel@Label>:
+    font_name: "Rubik"
+    color: 0, 0, 0, 1
+    markup: True
+    text: ""
+    
+<Stopwatch>:
+    stopwatches: [bug_red_time, bug_green_time, bug_blue_time, bug_orange_time]
+    
+    canvas:
+        Color:
+            rgba: 0, 0, 0, .9
+        Line:
+            rounded_rectangle: self.x, self.y, self.width, self.height, 25
+            width: 2
+        
+    orientation: "vertical"
+    padding: 10, 20
+    
+    ResultsLabel:
+        id: bug_red_time
+        text_size: (self.width, None)
+        halign: "left"
+        
+    ResultsLabel:
+        id: bug_green_time
+        text_size: (self.width, None)
+        halign: "left"
+        
+    ResultsLabel:
+        id: bug_blue_time
+        text_size: (self.width, None)
+        halign: "left"
+        
+    ResultsLabel:
+        id: bug_orange_time
+        text_size: (self.width, None)
+        halign: "left"
+        
+            
+<RaceScreen>:
+    game: root.manager    
+    bug_red: red
+    bug_green: green
+    bug_blue: blue
+    bug_orange: orange
+    bugs: [red, green, blue, orange]
+    stopwatch: stopwatch_id
+            
+    BoxLayout:
+        orientation: "horizontal"
+        
+        MDFloatLayout:
+            size_hint: .6, 1
+            md_bg_color: app.theme_cls.primary_color
+                        
+            canvas:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.width * 0.06, self.height * 0.1
+                    size: self.width * 0.88, 4
+                Rectangle:
+                    pos: self.width * 0.06, self.height * 0.92
+                    size: self.width * 0.88, 4
+                Rectangle:
+                    pos: self.width * 0.1, self.height * 0.08
+                    size: 4, self.height * 0.86
+                Rectangle:
+                    pos: self.width * 0.9, self.height * 0.08
+                    size: 4, self.height * 0.86
+                Rectangle:
+                    pos: self.width * 0.3, self.height * 0.08
+                    size: 4, self.height * 0.86
+                Rectangle:
+                    pos: self.width * 0.5, self.height * 0.08
+                    size: 4, self.height * 0.86
+                Rectangle:
+                    pos: self.width * 0.7, self.height * 0.08
+                    size: 4, self.height * 0.86
+    
+            Bug:
+                id: red
+                pos: root.width * 0.6 * 0.2 - 60, root.height * 0.1 - 120
+                image: "images/ladybug_red.png"
+        
+            Bug:
+                id: green
+                pos: root.width * 0.6 * 0.4 - 60, root.height * 0.1 - 120
+                image: "images/ladybug_green.png"
+                
+            Bug:
+                id: blue
+                pos: root.width * 0.6 * 0.6 - 60, root.height * 0.1 - 120
+                image: "images/ladybug_blue.png"
+                
+            Bug:
+                id: orange
+                pos: root.width * 0.6 * 0.8 - 60, root.height * 0.1 - 120
+                image: "images/ladybug_orange.png"
+
+        MDFloatLayout:
+            size_hint: .4, 1
+            padding: 30
+            md_bg_color: app.theme_cls.primary_light
+            
+            Stopwatch:
+                id: stopwatch_id
+                pos_hint: {'center_x': 1, 'center_y': .85}
+                size_hint: .86, .18
+                        
+                     
+<RaceResults>:
+    results_labels: [player1_result, player2_result, player3_result, player4_result]
+    size_hint_y: None
+    height: "220dp"
+    
+    Image:
+        size_hint_y: None
+        height: "80dp"
+        pos_hint: {'center_x': .5, 'top': 1}
+        source: "images/finish.jpg"
+    
+    ResultsLabel:
+        id: race_winner
+        pos_hint: {'center_x': .5, 'center_y': .6}
+
+    BoxLayout:
+        size_hint_y: None
+        height: "100dp"
+        orientation: "vertical"
+        pos_hint: {'center_x': .5, 'center_y': .3}
+        
+        ResultsLabel:
+            id: player1_result
+        
+        ResultsLabel:
+            id: player2_result
+        
+        ResultsLabel:
+            id: player3_result
+        
+        ResultsLabel:
+            id: player4_result
+                                        
