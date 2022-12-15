@@ -74,7 +74,25 @@
                 pos: self.pos
                 size: self.size
                 source: "images/welcome_screen.jpg"
-                                                                 
+
+        MDLabel:
+            pos_hint: {"center_x": .5, "center_y": .6}
+            font_name: "Rubik"
+            font_size: 50
+            italic: True
+            halign: "center"
+            color: get_color_from_hex("#460C68")
+            text: "Turtle Army\n Racing"
+
+        MDLabel:
+            pos_hint: {"center_x": .5, "center_y": .1}
+            font_name: "Rubik"
+            font_size: 35
+            italic: True
+            halign: "center"
+            color: get_color_from_hex("#460C68")
+            text: "Group 1"
+
         MDRoundFlatButton:
             text: "PLAY"
             font_style: "H4"
